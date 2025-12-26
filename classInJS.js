@@ -3,48 +3,58 @@
 
 // STATIC : Belongs to the class itself and not to the class instace
 
-// inheritance
+// inheritance = allows new class to inherit properites and methods froma existing class (parent -> child)
 
-class Products {
-    constructor(name, price){
+// super = keyword is used in classes to call the constructor or access the properties and methods of a parent.
+// this = this object
+// super = the parent
+
+// getters = special methods that makes a property readable
+// setters = special methods that makes a property writable
+class Animal{
+    constructor(name, age){
         this.name = name;
-        this.price = price;
+        this.age = age;
     }
+    set width(newWidth){
 
-    displayProduct(){
-        console.log(`Product : ${this.name}`);
-        console.log(`Price : ${this.price}`);
     }
-
-    calculateTotal(salesTax){
-        return this.price + (this.price * salesTax);
+    alive = true;
+    move(speed){
+        console.log(`The ${this.name} moves at speed of ${speed}kph`)
     }
-}
-
-class MathUtility{
-    static PI = 3.14159;
-    static getDiameter(radius){
-        return radius*2;
+    eat(){
+        console.log(`This ${this.name} is eating`)
     }
-    static getCircumference(radius) {
-        return (radius * 2*this.PI).toFixed(2);
+    sleep() {
+        console.log(`This ${this.name} is sleeping`)
     }
 }
 
-class User{
-    static userCount = 0;
-
-    constructor(username){
-        this.username = username;
-        User.userCount++;
+class Rabbit extends Animal{
+    constructor(name, age, runSpeed) {
+        super(name, age);
+        this.runSpeed = runSpeed;
+    }
+    run(){
+        console.log(`This ${this.name} is running`);
+        super.move(this.runSpeed);
     }
 }
+class Fish extends Animal {
+    constructor(name, age, swimSpeed) {
+        super(name, age);
+        this.swimSpeed = swimSpeed;
+    }
+    swim(){
+        console.log(`This ${this.name} is swimming`);
+        super.move(this.swimSpeed);
+    }
 
-const user1 = new User("Harsha");
-console.log(user1.username);
-console.log(User.userCount);
+}
 
-const user2 = new User("Harsha");
-console.log(user2.username);
-console.log(User.userCount);
+const rabbit = new Rabbit("rabbit", 1, 25);
+const fish = new Fish("fish", 2, 12);
 
+rabbit.run();
+fish.swim();
